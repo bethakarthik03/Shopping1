@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductPage from './ProductPage';
-import libas from '../Assets/libas1.jpeg';
+import peach from '../Assets/peachself.jpeg'
 import libas1 from '../Assets/libas1.jpeg';
 import libas2 from '../Assets/libas2.jpeg';
 import libas3 from '../Assets/libas3.jpeg';
@@ -9,17 +9,17 @@ const WomenLibas = () => {
   const product = {
     id: 5,
     name: "Women Libas Dress",
-    img: libas,
+    img: peach,
     price: "₹4,880"
   };
 
-  const thumbnails = [libas, libas1, libas2, libas3];
+  const thumbnails = [peach, libas1, libas2, libas3];
   const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
   return (
     <ProductPage
       product={product}
-      mainImage={libas}
+      mainImage={peach}
       thumbnails={thumbnails}
       tag="BestSeller"
       title="Women Libas Dress"
