@@ -58,34 +58,36 @@ const Signup = () => {
     }
   }
   return (
-    <div className='addUser'>
-        <h3>Sign Up</h3>
-        <form className='addUserForm' onSubmit={handleSubmit}>
-            <div className="inputGroup">
-                <label htmlFor="fname">First Name:</label>
-                <input type="text" id='fname' autoComplete='off' value={formData.fname} onChange={handleChange} placeholder='Enter your First name' />
-                {errors.fname && <span className="error">{errors.fname}</span>}
-                <label htmlFor="lname">Last Name:</label>
-                <input type="text" id='lname' autoComplete='off' value={formData.lname} onChange={handleChange} placeholder='Enter your Last name' />
-                {errors.lname && <span className="error">{errors.lname}</span>}
-                <label htmlFor="email">Email:</label>
-                <input type="email" id='email' autoComplete='off' value={formData.email} onChange={handleChange} placeholder='Enter your email' />
-                 {errors.email && <span className="error">{errors.email}</span>}
-                <label htmlFor="pass">Password:</label>
-                <input type="password" id='pass' value={formData.pass} onChange={handleChange}  placeholder='Enter your password' />
-                {errors.pass && <span className="error">{errors.pass}</span>}
-                <label htmlFor="cPass">Confirm Password:</label>
-                <input type="password" id='cPass' value={formData.cPass} onChange={handleChange}  placeholder='Enter your confirm password' />
-                {errors.cPass && (
-            <span className="error">{errors.cPass}</span>
-          )}
-                <button type="submit" class="btn btn-success" >Sign Up</button>
-            </div>
-        </form>
-        <div className="login">
-            <p>Already have an account ?</p>
-            <Link to="/" type="submit" class="btn btn-primary">Login</Link>
-        </div>
+    <div className='signup-background'>
+      <div className='addUser'>
+          <h3>Sign Up</h3>
+          <form className='addUserForm' onSubmit={handleSubmit}>
+              <div className="inputGroup">
+                  <label htmlFor="fname">First Name:</label>
+                  <input type="text" id='fname' autoComplete='off' value={formData.fname} onChange={handleChange} placeholder='Enter your First name' />
+                  {errors.fname && <span className="error">{errors.fname}</span>}
+                  <label htmlFor="lname">Last Name:</label>
+                  <input type="text" id='lname' autoComplete='off' value={formData.lname} onChange={handleChange} placeholder='Enter your Last name' />
+                  {errors.lname && <span className="error">{errors.lname}</span>}
+                  <label htmlFor="email">Email:</label>
+                  <input type="email" id='email' autoComplete='off' value={formData.email} onChange={handleChange} placeholder='Enter your email' />
+                   {errors.email && <span className="error">{errors.email}</span>}
+                  <label htmlFor="pass">Password:</label>
+                  <input type="password" id='pass' value={formData.pass} onChange={handleChange}  placeholder='Enter your password' />
+                  {errors.pass && <span className="error">{errors.pass}</span>}
+                  <label htmlFor="cPass">Confirm Password:</label>
+                  <input type="password" id='cPass' value={formData.cPass} onChange={handleChange}  placeholder='Enter your confirm password' />
+                  {errors.cPass && (
+              <span className="error">{errors.cPass}</span>
+            )}
+                  <button type="submit" class="btn btn-success" >Sign Up</button>
+              </div>
+          </form>
+          <div className="login">
+              <p>Already have an account ?</p>
+              <Link to="/" type="submit" class="btn btn-primary">Login</Link>
+          </div>
+      </div>
     </div>
   )
 }

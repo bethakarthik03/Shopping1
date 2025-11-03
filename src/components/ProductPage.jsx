@@ -27,6 +27,7 @@ const ProductPage = ({
   const cartlistCount = cartlistItems.length;
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [currentMainImage, setCurrentMainImage] = useState(mainImage);
 
   const handleAddToWishlist = () => {
     if (sizes.length > 0 && !selectedSize) {
@@ -100,11 +101,11 @@ const ProductPage = ({
         <div className="product-images">
           <div className="thumbnail-gallery">
             {thumbnails.map((thumb, index) => (
-              <img key={index} src={thumb} alt={title} />
+              <img key={index} src={thumb} alt={title} onClick={() => setCurrentMainImage(thumb)} style={{ cursor: 'pointer' }} />
             ))}
           </div>
           <div className="main-image">
-            <img src={mainImage} alt={title} />
+            <img src={currentMainImage} alt={title} />
           </div>
         </div>
         <div className="product-details">

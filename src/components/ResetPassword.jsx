@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./Authcontent";
+import image from '../Assets/backgroundimage.jpg'
 const ResetPassword = () => {
     const[formData,setFormData]=useState({
         newPassword:"",
@@ -69,7 +70,10 @@ const styles={
         justifyContent:"center",
         alignItems:"center",
         height:"100vh",
-        backgroundColor: "aliceblue"
+        backgroundImage: {image},
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
     },
     card:{
         backgroundColor:"#fff",

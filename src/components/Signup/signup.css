@@ -1,6 +1,17 @@
+.signup-background {
+  background-image: url('../../Assets/backgroundimage.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .addUser {
   width: 30%;
-  margin: 90px auto;
+  margin: 0 auto;
   background: #fff;
   border-radius: 10px;
   padding: 40px;
@@ -49,7 +60,7 @@
 @media (max-width: 480px) {
   .addUser {
     width: 95%;
-    margin: 30px auto;
+    margin: 0 auto;
     padding: 20px;
     border-radius: 8px;
   }
@@ -81,7 +92,7 @@
 @media (max-width: 768px) {
   .addUser {
     width: 90%;
-    margin: 60px auto;
+    margin: 0 auto;
     padding: 30px;
   }
   .addUserForm label {
@@ -107,7 +118,7 @@
 @media (min-width: 769px) and (max-width: 1024px) {
   .addUser {
     width: 50%;
-    margin: 75px auto;
+    margin: 0 auto;
     padding: 35px;
   }
   .addUserForm label {

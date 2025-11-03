@@ -17,7 +17,7 @@
   gap: 8px;
 }
 .logo img {
-  width: 120px;
+  width: 80px;
   height: auto;
   border-radius: 10px;
   cursor: pointer;
@@ -26,7 +26,7 @@
 .hamburger-button {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   color: white;
   cursor: pointer;
 }
@@ -91,7 +91,6 @@
 .search-icon {
   color: #d66503;
   font-size: 18px;
-  
 }
 .nav-buttons {
   display: flex;
@@ -141,8 +140,8 @@
   transition: 0.3s ease;
 }
 .icon-btn:hover {
-  background-color:#e03e3e;
-   transform: translateY(-2px);
+  background-color: #e03e3e;
+  transform: translateY(-2px);
 }
 
 .icon {
@@ -307,7 +306,9 @@
     justify-content: center;
     margin-top: 8px;
   }
-  .login-btn, .signup-btn, .logout-btn {
+  .login-btn,
+  .signup-btn,
+  .logout-btn {
     padding: 6px 10px;
     font-size: 13px;
   }
@@ -413,7 +414,9 @@
     justify-content: center;
     margin-top: 10px;
   }
-  .login-btn, .signup-btn, .logout-btn {
+  .login-btn,
+  .signup-btn,
+  .logout-btn {
     padding: 6px 12px;
     font-size: 14px;
   }
@@ -511,7 +514,9 @@
   .nav-buttons {
     gap: 15px;
   }
-  .login-btn, .signup-btn, .logout-btn {
+  .login-btn,
+  .signup-btn,
+  .logout-btn {
     padding: 7px 13px;
     font-size: 14px;
   }
@@ -594,7 +599,9 @@
   .nav-buttons {
     gap: 20px;
   }
-  .login-btn, .signup-btn, .logout-btn {
+  .login-btn,
+  .signup-btn,
+  .logout-btn {
     padding: 8px 14px;
     font-size: 15px;
   }

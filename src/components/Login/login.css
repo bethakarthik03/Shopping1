@@ -1,6 +1,17 @@
+.login-background {
+  background-image: url('../../Assets/backgroundimage.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .addUser {
   width: 25%;
-  margin: 120px auto;
+  margin: 0 auto;
   background-color: white;
   padding: 40px;
   border-radius: 10px;
@@ -114,7 +125,7 @@
 @media (max-width: 480px) {
   .addUser {
     width: 95%;
-    margin: 40px auto;
+    margin: 0 auto;
     padding: 20px;
     border-radius: 8px;
   }
@@ -160,7 +171,7 @@
 @media (max-width: 768px) {
   .addUser {
     width: 90%;
-    margin: 80px auto;
+    margin: 0 auto;
     padding: 30px;
   }
   .addUserForm .inputGroup input {
@@ -186,7 +197,7 @@
 @media (min-width: 769px) and (max-width: 1024px) {
   .addUser {
     width: 40%;
-    margin: 100px auto;
+    margin: 0 auto;
     padding: 35px;
   }
   .addUserForm .inputGroup input {

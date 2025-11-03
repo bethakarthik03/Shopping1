@@ -78,7 +78,7 @@ const Home = () => {
             <div className="menu-item" onClick={() => { scrollToSection('women-section'); setMenuOpen(false); }} style={{textAlign:'center'}}>Women</div>
             <div className="menu-item" onClick={() => { scrollToSection('kids-section'); setMenuOpen(false); }} style={{textAlign:'center'}}>Kids</div>
             <div className="menu-item" onClick={() => { scrollToSection('bags-section'); setMenuOpen(false); }} style={{textAlign:'center'}}>Bags</div>
-            
+
             <div className="menu-item" onClick={() => { scrollToSection('shoes-section'); setMenuOpen(false); }} style={{textAlign:'center'}}>Shoes</div>
             <div className="nav-buttons">
                 {isAuthenticated ? (
@@ -118,27 +118,27 @@ const Home = () => {
         </div>
         <div className="row">
             <div className="col-3">
-                <img src={westernWear} alt="" />
+                <img src={westernWear} alt="" onClick={(e) => { e.preventDefault(); scrollToSection('women-section'); }} />
                 <p>WesternWear</p>
             </div>
             <div className="col-3">
-                <img src={iWear} alt="" />
+                <img src={iWear} alt="" onClick={(e) => { e.preventDefault(); scrollToSection('women-section'); }}/>
                 <p>IndianWear</p>
             </div>
             <div className="col-3">
-                <img src={men} alt="" />
+                <img src={men} alt="" onClick={(e) => { e.preventDefault(); scrollToSection('mens-section'); }}/>
                 <p>Men</p>
             </div>
             <div className="col-3">
-                <img src={kids} alt=""  />
+                <img src={kids} alt="" onClick={(e) => { e.preventDefault(); scrollToSection('kids-section'); }}/>
                 <p>Kids</p>
             </div>
             <div className="col-3">
-                <img src={bags} alt="" />
+                <img src={bags} alt="" onClick={(e) => { e.preventDefault(); scrollToSection('bags-section'); }}/>
                 <p>Bags</p>
             </div>
             <div className="col-3">
-                <img src={shoes} alt="" />
+                <img src={shoes} alt="" onClick={(e) => { e.preventDefault(); scrollToSection('shoes-section'); }}/>
                 <p>Shoes</p>
             </div>
         </div>

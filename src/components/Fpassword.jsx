@@ -26,7 +26,7 @@ const Fpassword = () => {
     <div style={styles.container}>
       <div style={styles.card}>
         <h2 style={styles.heading}>Forgot Password</h2>
-        
+
         <div style={styles.formContainer}>
           <input
             type="email"
@@ -51,7 +51,10 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
-    backgroundColor: 'aliceblue',
+    backgroundImage: 'url("../Assets/backgroundimage.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
   },
   card: {
     backgroundColor: "#fff",
