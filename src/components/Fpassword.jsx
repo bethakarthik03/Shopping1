@@ -1,29 +1,32 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import navigation hook
-
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import backgroundImage from '../Assets/backgroundimage.jpg';
 const Fpassword = () => {
   const [email, setEmail] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleResetLink = () => {
     if (email.trim() === "") {
-      alert("Please enter your email address");
+      toast.error("Please enter your email address");
     } else {
-      alert(`Reset link sent to ${email}`);
+      toast.success(`Reset link sent to ${email}`);
       setTimeout(() => {
         navigate("/rPassword");
-      }, 1000);
+      }, 1500);
     }
   };
 
-  const handleBackLink=()=>{
-    setTimeout(()=>{
+  const handleBackLink = () => {
+    setTimeout(() => {
       navigate("/");
     }, 1000);
   }
 
   return (
     <div style={styles.container}>
+      <ToastContainer position="top-center" autoClose={2500} hideProgressBar={false} newestOnTop={true} closeOnClick pauseOnHover draggable theme="colored" />
       <div style={styles.card}>
         <h2 style={styles.heading}>Forgot Password</h2>
 
@@ -51,7 +54,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
-    backgroundImage: 'url("../Assets/backgroundimage.jpg")',
+    backgroundImage: `url(${backgroundImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -67,11 +70,6 @@ const styles = {
   heading: {
     marginBottom: "25px",
     color: "#333",
-  },
-  text: {
-    fontSize: "14px",
-    color: "#555",
-    marginBottom: "10px",
   },
   formContainer: {
     display: "flex",
@@ -96,15 +94,15 @@ const styles = {
     fontSize: "14px",
     transition: "background 0.3s",
   },
-  backButton:{
-    backgroundColor:"#007bff",
-    color:"#fff",
-    padding:"10px",
-    border:"none",
+  backButton: {
+    backgroundColor: "#007bff",
+    color: "#fff",
+    padding: "10px",
+    border: "none",
     borderRadius: "6px",
-    cursor:"pointer",
-    fontWeight:"bold",
-    fontSize:"14px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    fontSize: "14px",
     transition: "background 0.3s",
   }
 };

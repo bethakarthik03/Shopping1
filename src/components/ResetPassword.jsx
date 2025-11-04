@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./Authcontent";
-import image from '../Assets/backgroundimage.jpg'
+import backgroundImage from '../Assets/backgroundimage.jpg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ResetPassword = () => {
     const[formData,setFormData]=useState({
         newPassword:"",
@@ -24,30 +26,32 @@ const ResetPassword = () => {
         resetPassword();
         const{newPassword,confirmPassword}=formData;
 
-        
+
         if (newPassword.length < 6) {
-            setError("Password must be at least 6 characters long");
+            toast.error("Password must be at least 6 characters long");
             return;
         }
 
         else if (newPassword !=="" && confirmPassword!=="") {
-            setError("Passwords do not match");
+            toast.error("Passwords do not match");
             return;
         }
-       
-        setSuccess("Password reset successfully!");
+
+        toast.success("Password reset successfully!");
         setError("");
+        setSuccess("");
 
         console.log("New password set:", newPassword);
-        
+
         setTimeout(() => {
-        
+
         navigate("/");
-        }, 1000);
-        
+        }, 1500);
+
     }
   return (
     <div style={styles.container}>
+        <ToastContainer position="top-center" autoClose={2500} hideProgressBar={false} newestOnTop={true} closeOnClick pauseOnHover draggable theme="colored" />
         <div style={styles.card}>
             <h2 style={styles.heading}>Reset Password</h2>
             <form onSubmit={handleSubmit} style={styles.form}>
@@ -66,11 +70,11 @@ const ResetPassword = () => {
 
 const styles={
     container:{
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
-        height:"100vh",
-        backgroundImage: {image},
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

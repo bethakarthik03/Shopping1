@@ -6,6 +6,8 @@ import { useCartlist } from './CartlistContext';
 import { useNavigate } from 'react-router-dom';
 import logo from '../Assets/Nykaalogo.png';
 import './styli.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductPage = ({
   product,
@@ -28,10 +30,9 @@ const ProductPage = ({
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [currentMainImage, setCurrentMainImage] = useState(mainImage);
-
   const handleAddToWishlist = () => {
     if (sizes.length > 0 && !selectedSize) {
-      alert('Please select a size before adding to wishlist.');
+      toast.error('Please select a size before adding to wishlist.');
       return;
     }
     const itemWithSize = sizes.length > 0 ? { ...product, selectedSize } : product;
@@ -51,6 +52,7 @@ const ProductPage = ({
 
   return (
     <div>
+      <ToastContainer position="top-center" autoClose={2500} hideProgressBar={false} newestOnTop={true} closeOnClick pauseOnHover draggable theme="colored" />
       <div className="navbar">
         <div className="nav-left">
           <div className="logo">
@@ -139,7 +141,7 @@ const ProductPage = ({
             </button>
             <button className="bag-btn" onClick={() => {
               if (sizes.length > 0 && !selectedSize) {
-                alert('Please select a size before adding to cart.');
+                toast.error('Please select a size before adding to cart.');
                 return;
               }
               const itemWithSize = sizes.length > 0 ? { ...product, selectedSize } : product;
