@@ -1,10 +1,92 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import '../Signup/signup.css'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../Authcontent";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import bgImage from "../../Assets/backgroundimage.jpg";   
+
+const styles = {
+  background: {
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  card: {
+    width: "30%",
+    background: "#fff",
+    padding: "40px",
+    borderRadius: "10px",
+    boxShadow: "1px 1px 8px rgba(0,0,0,0.065)",
+    fontFamily: "Arial, sans-serif",
+  },
+
+  title: {
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "darkcyan",
+    textTransform: "uppercase",
+    textShadow: "1px 1px 2px rgba(0,0,0,0.7)",
+  },
+
+  inputGroup: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+  },
+
+  label: {
+    marginTop: "10px",
+    fontWeight: "bold",
+  },
+
+  input: {
+    width: "100%",
+    padding: "8px",
+    marginTop: "5px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    fontSize: "14px",
+  },
+
+  button: {
+    width: "100%",
+    marginTop: "15px",
+    padding: "12px",
+    backgroundColor: "#06d6a0",
+    border: "none",
+    borderRadius: "8px",
+    fontSize: "16px",
+    color: "white",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "0.3s ease-in-out",
+  },
+
+  loginSection: {
+    marginTop: "20px",
+    textAlign: "center",
+  },
+
+  loginLink: {
+    width: "100%",
+    marginTop: "12px",
+    padding: "12px",
+    backgroundColor: "#0077b6",
+    color: "white",
+    borderRadius: "8px",
+    display: "inline-block",
+    textDecoration: "none",
+    fontWeight: "600",
+  },
+};
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -13,103 +95,107 @@ const Signup = () => {
     email: "",
     pass: "",
     cPass: "",
-  })
+  });
 
   const navigate = useNavigate();
   const { signup } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-  }
-
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
   };
+
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.fname.trim()) {
-      toast.error('First name is required');
-      return;
-    }
-
-    if (!formData.lname.trim()) {
-      toast.error('Last name is required');
-      return;
-    }
-
-    if (!formData.email.trim()) {
-      toast.error('Email is required');
-      return;
-    }
-
-    if (!validateEmail(formData.email)) {
-      toast.error('Invalid email format');
-      return;
-    }
-
-    if (!formData.pass.trim()) {
-      toast.error('Password is required');
-      return;
-    }
-
-    if (formData.pass.length < 8) {
-      toast.error('Password must be at least 8 characters');
-      return;
-    }
-
-    if (!formData.cPass.trim()) {
-      toast.error('Please confirm your password');
-      return;
-    }
-
-    if (formData.pass !== formData.cPass) {
-      toast.error('Passwords do not match');
-      return;
-    }
+    if (!formData.fname.trim()) return toast.error("First name is required");
+    if (!formData.lname.trim()) return toast.error("Last name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!validateEmail(formData.email)) return toast.error("Invalid email");
+    if (!formData.pass.trim()) return toast.error("Password is required");
+    if (formData.pass.length < 8)
+      return toast.error("Password must be at least 8 characters");
+    if (!formData.cPass.trim()) return toast.error("Confirm your password");
+    if (formData.pass !== formData.cPass)
+      return toast.error("Passwords do not match");
 
     toast.success("Signup Successful!");
     signup();
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
-    console.log("Form Submitted:", formData);
-  }
+    setTimeout(() => navigate("/"), 1500);
+  };
 
   return (
-    <div className='signup-background'>
-      <ToastContainer position="top-center" autoClose={2500} hideProgressBar={false} newestOnTop={true} closeOnClick pauseOnHover draggable theme="colored" />
-      <div className='addUser'>
-        <h3>Sign Up</h3>
-        <form className='addUserForm' onSubmit={handleSubmit}>
-          <div className="inputGroup">
-            <label htmlFor="fname">First Name:</label>
-            <input type="text" id='fname' autoComplete='off' value={formData.fname} onChange={handleChange} placeholder='Enter your First name' />
+    <div style={styles.background}>
+      <ToastContainer theme="colored" />
 
-            <label htmlFor="lname">Last Name:</label>
-            <input type="text" id='lname' autoComplete='off' value={formData.lname} onChange={handleChange} placeholder='Enter your Last name' />
+      <div style={styles.card}>
+        <h3 style={styles.title}>Sign Up</h3>
 
-            <label htmlFor="email">Email:</label>
-            <input type="email" id='email' autoComplete='off' value={formData.email} onChange={handleChange} placeholder='Enter your email' />
+        <form onSubmit={handleSubmit}>
+          <div style={styles.inputGroup}>
 
-            <label htmlFor="pass">Password:</label>
-            <input type="password" id='pass' value={formData.pass} onChange={handleChange} placeholder='Enter your password' />
+            <label style={styles.label}>First Name:</label>
+            <input
+              style={styles.input}
+              id="fname"
+              value={formData.fname}
+              onChange={handleChange}
+              placeholder="Enter your First name"
+            />
 
-            <label htmlFor="cPass">Confirm Password:</label>
-            <input type="password" id='cPass' value={formData.cPass} onChange={handleChange} placeholder='Enter your confirm password' />
+            <label style={styles.label}>Last Name:</label>
+            <input
+              style={styles.input}
+              id="lname"
+              value={formData.lname}
+              onChange={handleChange}
+              placeholder="Enter your Last name"
+            />
 
-            <button type="submit" className="btn btn-success">Sign Up</button>
+            <label style={styles.label}>Email:</label>
+            <input
+              type="email"
+              style={styles.input}
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+            />
+
+            <label style={styles.label}>Password:</label>
+            <input
+              type="password"
+              style={styles.input}
+              id="pass"
+              value={formData.pass}
+              onChange={handleChange}
+              placeholder="Enter your password"
+            />
+
+            <label style={styles.label}>Confirm Password:</label>
+            <input
+              type="password"
+              style={styles.input}
+              id="cPass"
+              value={formData.cPass}
+              onChange={handleChange}
+              placeholder="Confirm your password"
+            />
+
+            <button style={styles.button}>Sign Up</button>
           </div>
         </form>
-        <div className="login">
-          <p>Already have an account ?</p>
-          <Link to="/" className="btn btn-primary">Login</Link>
+
+        <div style={styles.loginSection}>
+          <p>Already have an account?</p>
+          <Link to="/" style={styles.loginLink}>
+            Login
+          </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

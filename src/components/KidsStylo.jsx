@@ -10,7 +10,7 @@ const KidsStylo = () => {
     id: 9,
     name: "Kids Stylo Outfit",
     img: stylo,
-    price: "₹1,440"
+    price: "₹1,440",
   };
 
   const thumbnails = [stylo, stylo1, stylo2, stylo3];
