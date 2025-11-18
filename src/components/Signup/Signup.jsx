@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../Authcontent";
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import bgImage from "../../Assets/backgroundimage.jpg";   
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import bgImage from "../../Assets/backgroundimage.jpg";
+import { registerUser } from "../../api/userApi";
 
 const styles = {
   background: {
@@ -18,7 +16,6 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-
   card: {
     width: "30%",
     background: "#fff",
@@ -27,7 +24,6 @@ const styles = {
     boxShadow: "1px 1px 8px rgba(0,0,0,0.065)",
     fontFamily: "Arial, sans-serif",
   },
-
   title: {
     textAlign: "center",
     fontWeight: "bold",
@@ -35,18 +31,15 @@ const styles = {
     textTransform: "uppercase",
     textShadow: "1px 1px 2px rgba(0,0,0,0.7)",
   },
-
   inputGroup: {
     display: "flex",
     flexDirection: "column",
     width: "100%",
   },
-
   label: {
     marginTop: "10px",
     fontWeight: "bold",
   },
-
   input: {
     width: "100%",
     padding: "8px",
@@ -55,7 +48,6 @@ const styles = {
     borderRadius: "5px",
     fontSize: "14px",
   },
-
   button: {
     width: "100%",
     marginTop: "15px",
@@ -69,12 +61,10 @@ const styles = {
     cursor: "pointer",
     transition: "0.3s ease-in-out",
   },
-
   loginSection: {
     marginTop: "20px",
     textAlign: "center",
   },
-
   loginLink: {
     width: "100%",
     marginTop: "12px",
@@ -98,15 +88,14 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
-  const { signup } = useAuth();
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
 
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validateEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.fname.trim()) return toast.error("First name is required");
@@ -116,72 +105,48 @@ const Signup = () => {
     if (!formData.pass.trim()) return toast.error("Password is required");
     if (formData.pass.length < 8)
       return toast.error("Password must be at least 8 characters");
-    if (!formData.cPass.trim()) return toast.error("Confirm your password");
+    if (!formData.cPass.trim())
+      return toast.error("Confirm your password");
     if (formData.pass !== formData.cPass)
       return toast.error("Passwords do not match");
 
-    toast.success("Signup Successful!");
-    signup();
-    setTimeout(() => navigate("/"), 1500);
+    const payload = {
+      name: `${formData.fname} ${formData.lname}`,
+      email: formData.email,
+      password: formData.pass,
+    };
+
+    try {
+      await registerUser(payload);
+      toast.success("Signup Successful!");
+      setTimeout(() => navigate("/"), 1500);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Signup Failed");
+    }
   };
 
   return (
     <div style={styles.background}>
       <ToastContainer theme="colored" />
-
       <div style={styles.card}>
         <h3 style={styles.title}>Sign Up</h3>
 
         <form onSubmit={handleSubmit}>
           <div style={styles.inputGroup}>
-
             <label style={styles.label}>First Name:</label>
-            <input
-              style={styles.input}
-              id="fname"
-              value={formData.fname}
-              onChange={handleChange}
-              placeholder="Enter your First name"
-            />
+            <input id="fname" value={formData.fname} onChange={handleChange} style={styles.input} />
 
             <label style={styles.label}>Last Name:</label>
-            <input
-              style={styles.input}
-              id="lname"
-              value={formData.lname}
-              onChange={handleChange}
-              placeholder="Enter your Last name"
-            />
+            <input id="lname" value={formData.lname} onChange={handleChange} style={styles.input} />
 
             <label style={styles.label}>Email:</label>
-            <input
-              type="email"
-              style={styles.input}
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-            />
+            <input type="email" id="email" value={formData.email} onChange={handleChange} style={styles.input} />
 
             <label style={styles.label}>Password:</label>
-            <input
-              type="password"
-              style={styles.input}
-              id="pass"
-              value={formData.pass}
-              onChange={handleChange}
-              placeholder="Enter your password"
-            />
+            <input type="password" id="pass" value={formData.pass} onChange={handleChange} style={styles.input} />
 
             <label style={styles.label}>Confirm Password:</label>
-            <input
-              type="password"
-              style={styles.input}
-              id="cPass"
-              value={formData.cPass}
-              onChange={handleChange}
-              placeholder="Confirm your password"
-            />
+            <input type="password" id="cPass" value={formData.cPass} onChange={handleChange} style={styles.input} />
 
             <button style={styles.button}>Sign Up</button>
           </div>

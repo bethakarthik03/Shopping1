@@ -34,6 +34,7 @@ import ShoesPuma from "./components/ShoesPuma.jsx";
 import ShoesRedTape from "./components/ShoesRedTape.jsx";
 import ShoesReebok from "./components/ShoesReebok.jsx";
 import Checkout from "./components/Checkout.jsx";
+import OrderConfirmation from "./components/OrderConfirmation.jsx";
 import Babydress from "./components/Babydress.jsx";
 import Jeans from "./components/Jeans.jsx";
 import Dress from "./components/Dress.jsx";
@@ -56,6 +57,8 @@ import Casualwear from "./components/Casualwear.jsx";
 
 import Shorts from "./components/Shorts.jsx";
 import Runningshoes from "./components/Runningshoes.jsx";
+import Heels from "./components/Heels.jsx";
+import ProductDetails from "./components/ProductDetails.jsx";
 
 function App() {
   return (
@@ -94,6 +97,7 @@ function App() {
                 <Route path="/shoesredtape" element={<ShoesRedTape />} />
                 <Route path="/shoesreebok" element={<ShoesReebok />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order-confirmation" element={<OrderConfirmation />} />
                 <Route path="/babydress" element={<Babydress />} />
                 <Route path="/jeans" element={<Jeans />} />
                 <Route path="/shorts" element={<Shorts />} />
@@ -115,7 +119,8 @@ function App() {
                 <Route path="/womenfootwear" element={<Footwearwomen />} />
                 <Route path="/formalshoes" element={<Formalshoes />} />
                 <Route path="/runningshoes" element={<Runningshoes />} />
-                <Route path="/heels" element={<Formalwear/>} />
+                <Route path="/heels" element={<Heels />} />
+                <Route path="/product/:id" element={<ProductDetails />} />
               </Routes>
             </Router>
           </CartlistProvider>

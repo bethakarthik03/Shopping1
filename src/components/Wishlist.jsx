@@ -29,42 +29,13 @@ const Wishlist = () => {
 
   return (
     <div>
-
-      {/* NAVBAR (Copied 100% same from Cart.jsx) */}
-      <div
-        className="navbar"
-        style={{
-          backgroundColor: "#0077b6",
-          padding: "10px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          color: "white",
-          position: "sticky",
-          top: 0,
-          zIndex: 1000,
-        }}
-      >
-        <div
-          className="nav-left"
-          style={{ display: "flex", alignItems: "center", gap: "10px" }}
-        >
-          <img
-            src={logo}
-            alt="logo"
-            style={{ width: "80px", height: "auto", borderRadius: "10px" }}
-          />
-
+      {/* NAVBAR */}
+      <div className="navbar-responsive">
+        <div className="nav-left-responsive">
+          <img src={logo} alt="logo" className="nav-logo-responsive" />
           <button
-            className="hamburger-button"
+            className="hamburger-button-responsive"
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{
-              background: "none",
-              border: "none",
-              fontSize: "20px",
-              color: "white",
-              cursor: "pointer",
-            }}
           >
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -72,24 +43,7 @@ const Wishlist = () => {
 
         {/* SIDE MENU */}
         <nav>
-          <div
-            className="side-menu"
-            style={{
-              position: "fixed",
-              top: 0,
-              left: menuOpen ? "0" : "-270px",
-              width: "250px",
-              height: "100vh",
-              backgroundColor: "#0077b6",
-              paddingTop: "70px",
-              paddingLeft: "20px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              transition: "left 0.3s ease-in-out",
-              zIndex: 1001,
-            }}
-          >
+          <div className={`side-menu-responsive ${menuOpen ? 'side-menu-open' : ''}`}>
             <div
               style={{
                 color: "#fff",
@@ -157,156 +111,48 @@ const Wishlist = () => {
             </div>
           </div>
 
-          {menuOpen && (
-            <div
-              className="overlay"
-              onClick={() => setMenuOpen(false)}
-              style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                zIndex: 1000,
-              }}
-            ></div>
-          )}
+          {menuOpen && <div className="overlay-responsive" onClick={() => setMenuOpen(false)}></div>}
         </nav>
 
         {/* SEARCH BAR */}
-        <div
-          className="nav-search"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "5px",
-            backgroundColor: "white",
-            borderRadius: "20px",
-            padding: "5px 10px",
-          }}
-        >
+        <div className="nav-search-responsive">
           <input
             type="text"
             placeholder="search products..."
-            style={{ border: "none", outline: "none", width: "180px" }}
+            className="nav-search-input"
           />
           <FaSearch style={{ color: "#0077b6" }} />
         </div>
 
         {/* ICON BUTTONS */}
-        <div
-          className="nav-buttons"
-          style={{ display: "flex", alignItems: "center", gap: "20px" }}
-        >
-          <div
-            onClick={() => navigate("/wishlist")}
-            style={{ position: "relative", cursor: "pointer" }}
-          >
+        <div className="nav-buttons-responsive">
+          <div className="nav-icon-responsive" onClick={() => navigate("/wishlist")}>
             <FaHeart style={{ fontSize: "20px", color: "white" }} />
-            <span
-              style={{
-                position: "absolute",
-                top: "-8px",
-                right: "-10px",
-                background: "red",
-                color: "white",
-                borderRadius: "50%",
-                padding: "2px 6px",
-                fontSize: "12px",
-              }}
-            >
-              {wishlistCount}
-            </span>
+            <span className="nav-icon-badge">{wishlistCount}</span>
           </div>
 
-          <div
-            onClick={() => navigate("/cart")}
-            style={{ position: "relative", cursor: "pointer" }}
-          >
+          <div className="nav-icon-responsive" onClick={() => navigate("/cart")}>
             <FaShoppingBag style={{ fontSize: "20px", color: "white" }} />
-            <span
-              style={{
-                position: "absolute",
-                top: "-8px",
-                right: "-10px",
-                background: "red",
-                color: "white",
-                borderRadius: "50%",
-                padding: "2px 6px",
-                fontSize: "12px",
-              }}
-            >
-              {cartlistCount}
-            </span>
+            <span className="nav-icon-badge">{cartlistCount}</span>
           </div>
         </div>
       </div>
 
       {/* --- WISHLIST CONTENT --- */}
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "1200px",
-          margin: "auto",
-          padding: "30px",
-        }}
-      >
-        <h2
-          style={{
-            fontSize: "28px",
-            fontWeight: "bold",
-            marginBottom: "25px",
-            textAlign: "center",
-          }}
-        >
-          Your WishList
-        </h2>
+      <div className="wishlist-content-responsive">
+        <h2 className="wishlist-title-responsive">Your WishList</h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-            gap: "20px",
-          }}
-        >
+        <div className="wishlist-grid-responsive">
           {wishlistItems.map((item) => (
-            <div
-              key={`${item.id}-${item.selectedSize}`}
-              style={{
-                backgroundColor: "white",
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                padding: "15px",
-                textAlign: "center",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
-              }}
-            >
-              <img
-                src={item.img}
-                alt={item.name}
-                style={{
-                  width: "100%",
-                  height: "220px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
-              />
+            <div key={`${item.id}-${item.selectedSize}`} className="wishlist-item-responsive">
+              <img src={item.img} alt={item.name} className="wishlist-item-img" />
 
-              <h3 style={{ fontSize: "18px", margin: "10px 0" }}>{item.name}</h3>
-              <p style={{ margin: "10px 0" }}>Size: {item.selectedSize}</p>
+              <h3 className="wishlist-item-name">{item.name}</h3>
+              <p className="wishlist-item-size">Size: {item.selectedSize}</p>
 
               <button
-                style={{
-                  padding: "10px 15px",
-                  border: "none",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                  margin: "5px",
-                  fontWeight: "500",
-                  backgroundColor: "black",
-                  color: "white",
-                }}
+                className="wishlist-item-btn"
+                style={{ backgroundColor: "black", color: "white" }}
                 onClick={() => {
                   addToCartlist(item);
                   removeFromWishlist(item.id);
@@ -317,16 +163,8 @@ const Wishlist = () => {
               </button>
 
               <button
-                style={{
-                  padding: "10px 15px",
-                  border: "none",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                  margin: "5px",
-                  fontWeight: "500",
-                  backgroundColor: "#ff4b4b",
-                  color: "white",
-                }}
+                className="wishlist-item-btn"
+                style={{ backgroundColor: "#ff4b4b", color: "white" }}
                 onClick={() => removeFromWishlist(item.id)}
               >
                 Remove

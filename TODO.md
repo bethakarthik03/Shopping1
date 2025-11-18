@@ -1,6 +1,7 @@
-# TODO for Updating Formalwear.jsx to High Heels
+# TODO: Enable Navigation to Product Pages Without Loading
 
-- [x] Update product data in Formalwear.jsx to represent High Heels:
-  - Change import from formal.jpg to footheels.jpg
-  - Update product name, title, price, and sizes to shoe sizes
-  - Adjust thumbnails accordingly
+## Steps to Complete
+- [ ] Update Home.jsx: Change onClick navigate to use '/product' with state
+- [ ] Update App.js: Add route for '/product' pointing to ProductPage
+- [ ] Update ProductPage.jsx: Prioritize location.state for product data
+- [ ] Test navigation from Home to /product to ensure no loading

@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../Authcontent";
 import { ToastContainer, toast } from "react-toastify";
-import bgImage from "../../Assets/backgroundimage.jpg";
 import "react-toastify/dist/ReactToastify.css";
+import bgImage from "../../Assets/backgroundimage.jpg";
+import { loginUser } from "../../api/userApi";
+import { useAuth } from "../Authcontent"; 
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const navigate = useNavigate();
+  const { login } = useAuth(); 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  // Responsive listener
+  // Screen resize listener
   useEffect(() => {
     const resizeHandler = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", resizeHandler);
     return () => window.removeEventListener("resize", resizeHandler);
   }, []);
 
-  // Dynamic responsive width for login box
   const getResponsiveWidth = () => {
     if (windowWidth < 480) return "95%";
     if (windowWidth < 768) return "90%";
@@ -43,7 +41,6 @@ const Login = () => {
       justifyContent: "center",
       alignItems: "center",
     },
-
     card: {
       width: getResponsiveWidth(),
       background: "white",
@@ -51,7 +48,6 @@ const Login = () => {
       borderRadius: "10px",
       boxShadow: "1px 1px 8px rgba(0,0,0,0.065)",
     },
-
     title: {
       textAlign: "center",
       fontWeight: "bold",
@@ -68,18 +64,15 @@ const Login = () => {
           ? "22px"
           : "24px",
     },
-
     inputGroup: {
       width: "100%",
       display: "flex",
       flexDirection: "column",
     },
-
     label: {
       marginTop: "10px",
       fontSize: windowWidth < 480 ? "14px" : "16px",
     },
-
     input: {
       marginTop: "5px",
       padding: windowWidth < 480 ? "12px" : "10px",
@@ -88,7 +81,6 @@ const Login = () => {
       border: "1px solid #ccc",
       outline: "none",
     },
-
     primaryBtn: {
       width: "100%",
       padding: "12px",
@@ -103,7 +95,6 @@ const Login = () => {
       transition: "0.3s ease-in-out",
       boxShadow: "0 4px 12px rgba(0,119,182,0.3)",
     },
-
     successBtn: {
       width: "100%",
       padding: "12px",
@@ -121,7 +112,6 @@ const Login = () => {
       display: "block",
       textAlign: "center",
     },
-
     googleBtn: {
       width: "100%",
       padding: "12px",
@@ -137,7 +127,6 @@ const Login = () => {
       display: "block",
       textAlign: "center",
     },
-
     forgotPassword: {
       display: "flex",
       justifyContent: "center",
@@ -145,7 +134,6 @@ const Login = () => {
       fontSize: windowWidth < 480 ? "12px" : "14px",
       marginTop: "20px",
     },
-
     errorText: {
       color: "red",
       fontSize: "14px",
@@ -153,50 +141,40 @@ const Login = () => {
     },
   };
 
-  const validate = () => {
-    let formErrors = {};
-
-    if (!email) {
-      formErrors.email = "Email is required";
-      toast.error("Email is required");
-    } else if (!emailRegex.test(email)) {
-      formErrors.email = "Invalid email address";
-      toast.error("Invalid email");
-    }
-
-    if (!password) {
-      formErrors.password = "Password is required";
-      toast.error("Password is required");
-    } else if (password.length <= 8) {
-      formErrors.password = "Password must be more than 8 characters";
-      toast.error("Password must be more than 8 characters");
-    }
-
-    setErrors(formErrors);
-    return Object.keys(formErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      toast.warning("Please fill both email and password");
-      return;
-    }
+    if (!email || !password)
+      return toast.warning("Please fill both email and password");
 
-    if (!email.includes("@gmail.com")) {
-      toast.warning("Email must be a Gmail address");
-      return;
-    }
+    if (!emailRegex.test(email))
+      return toast.error("Invalid email");
 
-    if (validate()) {
-      setIsSubmitting(true);
-      toast.success("Login successful! Redirecting...");
+    if (password.length < 8)
+      return toast.error("Password must be at least 8 characters");
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await loginUser({ email, password });
+
+      // Save JWT token & user data
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      // 🔥 Update AuthContext state
+      login(res.data.token);
+
+      toast.success("Login successful!");
+
       setTimeout(() => {
-        login();
         navigate("/home");
-        setIsSubmitting(false);
-      }, 1500);
+      }, 1000);
+
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Login Failed");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -216,7 +194,6 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {errors.email && <p style={styles.errorText}>{errors.email}</p>}
 
             <label style={styles.label}>Password:</label>
             <input
@@ -225,11 +202,8 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {errors.password && (
-              <p style={styles.errorText}>{errors.password}</p>
-            )}
 
-            <button type="submit" style={styles.primaryBtn}>
+            <button type="submit" style={styles.primaryBtn} disabled={isSubmitting}>
               {isSubmitting ? "Logging in..." : "Login"}
             </button>
           </div>
@@ -247,7 +221,7 @@ const Login = () => {
         </Link>
 
         <Link to="/google-login" style={styles.googleBtn}>
-          Sign Up with Google
+          Sign In with Google
         </Link>
       </div>
     </div>

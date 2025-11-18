@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 const ProductPage = ({
   product,
   mainImage,
-  thumbnails,
+  thumbnails = [],
   tag,
   title,
   rating,
