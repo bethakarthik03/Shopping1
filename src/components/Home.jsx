@@ -602,18 +602,18 @@ const Home = () => {
       </div>
     </section>
 
-    {/* Bags Section */}
-    <section id="bags-section" style={styles.section('#f9f9f9')}>
+    {/* Lipsticks Section */}
+    <section id="lipsticks-section" style={styles.section('#f9f9f9')}>
       <div style={styles.sectionContainer}>
-        <h1 style={styles.sectionTitle}>Bags Collection</h1>
+        <h1 style={styles.sectionTitle}>Beauty & Essentials</h1>
         <div style={styles.productGrid}>
           {[
-            { img: bagsstyli, title: 'Styli Bag', desc: 'Print Flap Handbag', price: '₹1,332', old: '₹2,049', link: '/bagsstyli' },
-            { img: bagstommy, title: 'Tommy Hilfiger', desc: 'Solid Navy PU Handbag', price: '₹4,200', old: '₹5,999', link: '/bagstommy' },
-            { img: bagszouk, title: 'Zouk', desc: 'Office Bag - Jet Black', price: '₹4,000', old: '₹11,420', link: '/bagszouk' },
-            { img: bagsmouchi, title: 'Mochi', desc: 'Brown Leather Shoulder Bag', price: '₹3,894', old: '₹6,490', link: '/bagsmouchi' },
+            { img: lipbalm, title: 'Lip Balm', desc: 'Moisturizing Lip Balm', price: '₹199', old: '₹299', link: '/lipbalm' },
+            { img: perfume, title: 'Perfume', desc: 'Floral Fragrance', price: '₹499', old: '₹699', link: '/perfume' },
+            { img: shampoo, title: 'Shampoo', desc: 'Herbal Shampoo', price: '₹299', old: '₹399', link: '/shampoo' },
+            { img: sunscreen, title: 'Sunscreen', desc: 'SPF 50 Sunscreen', price: '₹399', old: '₹499', link: '/sunscreen' },
           ].map((item, i) => (
-        <div key={`bags-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
+            <div key={`beauty-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
                 e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.18)';
@@ -640,18 +640,19 @@ const Home = () => {
         </div>
       </div>
     </section>
-    {/* Lipsticks Section */}
-    <section id="lipsticks-section" style={styles.section('#f9f9f9')}>
+
+    {/* Bags Section */}
+    <section id="bags-section" style={styles.section('#f9f9f9')}>
       <div style={styles.sectionContainer}>
-        <h1 style={styles.sectionTitle}>Beauty & Essentials</h1>
+        <h1 style={styles.sectionTitle}>Bags Collection</h1>
         <div style={styles.productGrid}>
           {[
-            { img: lipbalm, title: 'Lip Balm', desc: 'Moisturizing Lip Balm', price: '₹199', old: '₹299', link: '/lipbalm' },
-            { img: perfume, title: 'Perfume', desc: 'Floral Fragrance', price: '₹499', old: '₹699', link: '/perfume' },
-            { img: shampoo, title: 'Shampoo', desc: 'Herbal Shampoo', price: '₹299', old: '₹399', link: '/shampoo' },
-            { img: sunscreen, title: 'Sunscreen', desc: 'SPF 50 Sunscreen', price: '₹399', old: '₹499', link: '/sunscreen' },
+            { img: bagsstyli, title: 'Styli Bag', desc: 'Print Flap Handbag', price: '₹1,332', old: '₹2,049', link: '/bagsstyli' },
+            { img: bagstommy, title: 'Tommy Hilfiger', desc: 'Solid Navy PU Handbag', price: '₹4,200', old: '₹5,999', link: '/bagstommy' },
+            { img: bagszouk, title: 'Zouk', desc: 'Office Bag - Jet Black', price: '₹4,000', old: '₹11,420', link: '/bagszouk' },
+            { img: bagsmouchi, title: 'Mochi', desc: 'Brown Leather Shoulder Bag', price: '₹3,894', old: '₹6,490', link: '/bagsmouchi' },
           ].map((item, i) => (
-            <div key={`beauty-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
+        <div key={`bags-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
                 e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.18)';
