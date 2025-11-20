@@ -35,6 +35,7 @@ import ShoesRedTape from "./components/ShoesRedTape.jsx";
 import ShoesReebok from "./components/ShoesReebok.jsx";
 import Checkout from "./components/Checkout.jsx";
 import OrderConfirmation from "./components/OrderConfirmation.jsx";
+import Orders from "./components/Orders.jsx";
 import Babydress from "./components/Babydress.jsx";
 import Jeans from "./components/Jeans.jsx";
 import Dress from "./components/Dress.jsx";
@@ -98,6 +99,7 @@ function App() {
                 <Route path="/shoesreebok" element={<ShoesReebok />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/order-confirmation" element={<OrderConfirmation />} />
+                <Route path="/orders" element={<Orders />} />
                 <Route path="/babydress" element={<Babydress />} />
                 <Route path="/jeans" element={<Jeans />} />
                 <Route path="/shorts" element={<Shorts />} />

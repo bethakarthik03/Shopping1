@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "./Authcontent";
 import { useWishlist } from "./WishlistContext";
 import { useCartlist } from "./CartlistContext";
-import { FaTimes, FaBars, FaSearch, FaHeart, FaShoppingBag } from "react-icons/fa";
+import { FaTimes, FaBars, FaSearch, FaHeart, FaClipboardList, FaShoppingBag } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import logo from "../Assets/Nykaalogo.png";
 
@@ -134,6 +134,9 @@ const Wishlist = () => {
           <div className="nav-icon-responsive" onClick={() => navigate("/cart")}>
             <FaShoppingBag style={{ fontSize: "20px", color: "white" }} />
             <span className="nav-icon-badge">{cartlistCount}</span>
+          </div>
+          <div className="nav-icon-responsive" onClick={() => navigate("/orders")}>
+            <FaClipboardList style={{ fontSize: "20px", color: "white" }} />
           </div>
         </div>
       </div>

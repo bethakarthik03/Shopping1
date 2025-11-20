@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaSearch, FaTimes, FaBars, FaHeart, FaShoppingBag } from "react-icons/fa";
+import { FaSearch, FaTimes, FaBars, FaHeart, FaShoppingBag, FaClipboardList } from "react-icons/fa";
 import { useAuth } from "./Authcontent";
 import { useWishlist } from "./WishlistContext";
 import { useCartlist } from "./CartlistContext";
@@ -204,6 +204,10 @@ const ProductPage = ({
           <div style={styles.relative} onClick={() => navigate("/cart")}>
             <FaShoppingBag style={styles.icon} />
             <span style={styles.badge}>{cartlistCount}</span>
+          </div>
+          <div style={styles.relative} onClick={() => navigate("/orders")}>
+            <FaClipboardList style={styles.icon} />
+            
           </div>
         </div>
       </div>

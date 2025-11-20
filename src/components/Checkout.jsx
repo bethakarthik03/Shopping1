@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaHeart, FaTimes, FaBars, FaSearch, FaShoppingBag, FaCreditCard, FaSpinner } from "react-icons/fa";
+import { FaHeart, FaTimes, FaBars, FaSearch, FaShoppingBag, FaClipboardList, FaCreditCard, FaSpinner } from "react-icons/fa";
 import { useAuth } from "./Authcontent";
 import { useWishlist } from "./WishlistContext";
 import { useCartlist } from "./CartlistContext";
@@ -46,7 +46,7 @@ const Checkout = () => {
   useEffect(() => {
     if (!isAuthenticated) {
       toast.error("Please login to continue!");
-      navigate("/");
+      navigate("/login");
       return;
     }
     if (!orderId || items.length === 0) {
@@ -183,6 +183,10 @@ const Checkout = () => {
           <div className="nav-icon-responsive" onClick={() => navigate("/cart")}>
             <FaShoppingBag style={{ fontSize: "20px", color: "white" }} />
             <span className="nav-icon-badge">{cartlistCount}</span>
+          </div>
+          <div className="nav-icon-responsive" onClick={() => navigate("/orders")}>
+            <FaClipboardList style={{ fontSize: "20px", color: "white" }} />
+            
           </div>
         </div>
       </div>

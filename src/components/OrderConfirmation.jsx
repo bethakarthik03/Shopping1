@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaCheckCircle, FaTimes, FaBars, FaHeart, FaShoppingBag } from "react-icons/fa";
+import { FaCheckCircle, FaTimes, FaBars, FaHeart, FaShoppingBag, FaClipboardList } from "react-icons/fa";
 import { useAuth } from "./Authcontent";
 import { useWishlist } from "./WishlistContext";
 import { useCartlist } from "./CartlistContext";
@@ -92,6 +92,10 @@ const OrderConfirmation = () => {
             <FaShoppingBag style={{ fontSize: "20px", color: "white" }} />
             <span className="nav-icon-badge">{cartlistCount}</span>
           </div>
+          <div className="nav-icon-responsive" onClick={() => navigate("/cart")}>
+            <FaClipboardList style={{ fontSize: "20px", color: "white" }} />
+            
+          </div>
         </div>
       </div>
 
@@ -126,7 +130,7 @@ const OrderConfirmation = () => {
             <h3 style={{ marginBottom: "15px", color: "#333" }}>Order Details</h3>
             <p><strong>Order ID:</strong> {orderData._id}</p>
             <p><strong>Payment ID:</strong> {paymentId || "N/A"}</p>
-            <p><strong>Total Amount:</strong> ₹{orderData.total}</p>
+            <p><strong>Total Amount:</strong> ₹{orderData.total?.toFixed(2) || "0.00"}</p>
             <p><strong>Status:</strong> {orderData.status}</p>
           </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaSearch, FaTimes, FaBars, FaHeart, FaShoppingBag } from 'react-icons/fa';
+import { FaSearch, FaTimes, FaBars, FaHeart, FaShoppingBag, FaClipboardList } from 'react-icons/fa';
 import { useAuth } from './Authcontent';
 import { useNavigate } from 'react-router-dom';
 import logo from '../Assets/Nykaalogo.png';
@@ -358,6 +358,10 @@ const Home = () => {
             <FaShoppingBag style={styles.icon} />
             <span style={styles.badge}>{cartlistCount}</span>
           </div>
+          <div style={styles.relative} onClick={() => navigate('/orders')}>
+            <FaClipboardList style={styles.icon} />
+            
+          </div>
         </div>
       </div>
 
@@ -496,18 +500,7 @@ const Home = () => {
         <div style={styles.sectionContainer}>
           <h1 style={styles.sectionTitle}>Men's Collection</h1>
           <div style={styles.productGrid}>
-            {[
-            { img: styli, title: 'Styli', desc: 'Men Dark Blue Balloon Fit Jeans', price: '₹1,440', old: '₹1,999', link: '/styli' },
-            { img: campus, title: 'Campus Sutra', desc: 'Black Solid Casual Shirt', price: '₹608', old: '₹1,899', link: '/campus' },
-            { img: garge, title: 'Indian Garage Co.', desc: 'Multi Striped Full Shirt', price: '₹753', old: '₹1,749', link: '/garage' },
-            { img: puma, title: 'Puma', desc: 'Unisex White Sneakers', price: '₹1,800', old: '₹4,499', link: '/puma' },
-            { img: jeans, title: 'Mast & Harbour', desc: 'Men Slim Fit Jeans', price: '₹949.99', old: '₹1,199', link: '/jeans' },
-            { img: tshirt, title: 'Mast & Harbour', desc: 'Men Cotton T-Shirt', price: '₹249.99', old: '₹399', link: '/t-shirts' },
-            { img: casual, title: 'Mast & Harbour', desc: 'Men Cotton Striped Casual Shirt', price: '₹299.99', old: '₹499', link: '/casualwear' },
-            { img: shorts, title: 'Mast & Harbour', desc: 'Men Cotton Shorts', price: '₹199.99', old: '₹349', link: '/shorts' },
-            { img: formal, title: 'Mast & Harbour', desc: 'Men Formal Shirt', price: '₹499.99', old: '₹699', link: '/formalwear' },
-            { img: trackpants, title: 'Mast & Harbour', desc: 'Men Track Pants', price: '₹349.99', old: '₹499', link: '/trackpants' },
-          ].map((item, i) => (
+            {mensProducts.map((item, i) => (
             <div
               key={`men-${i}`}
               style={{
@@ -522,7 +515,7 @@ const Home = () => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
               }}
-              onClick={() => navigate(`/product/${item.id}`)}
+              onClick={() => navigate(item.link)}
             >
               <img src={item.img} alt={item.title} style={{width: '100%',height: 'auto',borderRadius: '10px',marginBottom: '10px',}}
               />
@@ -546,16 +539,7 @@ const Home = () => {
       <div style={styles.sectionContainer}>
         <h1 style={styles.sectionTitle}>Women's Collection</h1>
         <div style={styles.productGrid}>
-          {[
-            { img: mabli, title: 'Mabish By Sonal', desc: 'Maroon Printed Crop Top', price: '₹1,976', old: '₹5,199', link: '/mabish' },
-            { img: peach, title: 'Libas', desc: 'Embroidered Peach Kurta & Pant', price: '₹4,880', old: '₹7,999', link: '/libas' },
-            { img: stylum, title: 'Stylum', desc: 'Blue Ajrakh Printed Kurta', price: '₹1,334', old: '₹4,599', link: '/stylum' },
-            { img: chaabra, title: 'Chhabra 555', desc: 'Cream Embroidered Crop Top', price: '₹3,920', old: '₹11,200', link: '/chaabra' },
-            { img: ethnicwear, title: 'Ethnic Wear', desc: 'Women Embroidered Kurti', price: '₹499.99', old: '₹699', link: '/ethnicwear' },
-            { img: westernWearImg, title: 'Western Wear', desc: 'Women Floral Print Top', price: '₹399.99', old: '₹599', link: '/westernwear' },
-            { img: dress, title: 'Dress', desc: 'Women Casual Dress', price: '₹599.99', old: '₹799', link: '/dress' },
-            { img: sareewear, title: 'Saree Wear', desc: 'Women Traditional Saree', price: '₹799.99', old: '₹1,599', link: '/sareewear' },
-          ].map((item, i) => (
+          {womensProducts.map((item, i) => (
             <div key={`women-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
@@ -565,7 +549,7 @@ const Home = () => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
               }}
-              onClick={() => navigate(`/product/${item.id}`)}
+              onClick={() => navigate(item.link)}
             >
               <img src={item.img} alt={item.title} style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px' }} />
               <h4 style={{ color: '#333', marginBottom: '8px' }}>{item.title}</h4>
@@ -589,16 +573,7 @@ const Home = () => {
       <div style={styles.sectionContainer}>
         <h1 style={styles.sectionTitle}>Kids' Collection</h1>
         <div style={styles.productGrid}>
-          {[
-            { img: stylobug, title: 'Stylo Bug', desc: 'Girls Kurta & Pant Yellow', price: '₹1,440', old: '₹3,599', link: '/kidsstylo' },
-            { img: aj, title: 'AJ Dezines', desc: 'Foil Printed Sleeveless Kurta', price: '₹1,800', old: '₹3,999', link: '/kidsaj' },
-            { img: bitiya, title: 'Bitiya By Bhama', desc: 'Ethnic Yellow Floral Kurta', price: '₹1,350', old: '₹4,499', link: '/kidsbitiya' },
-            { img: kisah, title: 'Kisah', desc: 'Cream Nehru Jacket', price: '₹1,499', old: '₹3,399', link: '/kidskisah' },
-            { img: babydress, title: 'Baby Dress', desc: 'Pink cotton romper', price: '₹199', old: '₹299', link: '/babydress' },
-            { img: childboy, title: 'Child Boy Wear', desc: 'Blue denim jacket', price: '₹349', old: '₹499', link: '/childboywear' },
-            { img: childshirt, title: 'Child Shirt', desc: 'Blue party shirt', price: '₹299', old: '₹399', link: '/childdress' },
-            { img: kidswear, title: 'Kids Wear', desc: 'Green cotton T-shirt with matching shorts', price: '₹249.99', old: '₹399', link: '/kidswear' },
-          ].map((item, i) => (
+          {kidsProducts.map((item, i) => (
             <div key={`kids-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
@@ -608,7 +583,7 @@ const Home = () => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
               }}
-              onClick={() => navigate(`/product/${item.id}`)}
+              onClick={() => navigate(item.link)}
             >
               <img src={item.img} alt={item.title} style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px' }} />
               <h4 style={{ color: '#333', marginBottom: '8px' }}>{item.title}</h4>
@@ -638,7 +613,7 @@ const Home = () => {
             { img: bagszouk, title: 'Zouk', desc: 'Office Bag - Jet Black', price: '₹4,000', old: '₹11,420', link: '/bagszouk' },
             { img: bagsmouchi, title: 'Mochi', desc: 'Brown Leather Shoulder Bag', price: '₹3,894', old: '₹6,490', link: '/bagsmouchi' },
           ].map((item, i) => (
-            <div key={`bags-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
+        <div key={`bags-${i}`} style={{...styles.productCard(),transition: 'transform 0.3s ease, box-shadow 0.3s ease',}}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
                 e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.18)';
@@ -647,7 +622,7 @@ const Home = () => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
               }}
-              onClick={() => navigate(`/product/${item.id}`)}
+              onClick={() => navigate(item.link)}
             >
               <img src={item.img} alt={item.title} style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px' }} />
               <h4 style={{ color: '#333', marginBottom: '8px' }}>{item.title}</h4>
@@ -685,7 +660,7 @@ const Home = () => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
               }}
-              onClick={() => navigate(`/product/${item.id}`)}
+              onClick={() => navigate(item.link)}
             >
               <img src={item.img} alt={item.title} style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px' }} />
               <h4 style={{ color: '#333', marginBottom: '8px' }}>{item.title}</h4>
@@ -727,7 +702,7 @@ const Home = () => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
               }}
-              onClick={() => navigate(`/product/${item.id}`)}
+              onClick={() => navigate(item.link)}
             >
               <img src={item.img} alt={item.title} style={{ width: '100%', height: 'auto', borderRadius: '10px', marginBottom: '10px' }} />
               <h4 style={{ color: '#333', marginBottom: '8px' }}>{item.title}</h4>

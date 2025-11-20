@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaHeart, FaTimes, FaBars, FaSearch, FaShoppingBag, FaTrash, FaSpinner } from "react-icons/fa";
+import { FaHeart, FaTimes, FaBars, FaSearch, FaShoppingBag, FaClipboardList, FaTrash, FaSpinner } from "react-icons/fa";
 import { useAuth } from "./Authcontent";
 import { useWishlist } from "./WishlistContext";
 import { useCartlist } from "./CartlistContext";
@@ -71,12 +71,18 @@ const Cart = () => {
       return;
     }
 
+    if (!isAuthenticated) {
+      toast.error("Please login to proceed with checkout!");
+      navigate("/login");
+      return;
+    }
+
     setIsLoading(true);
 
     const items = cartlistItems.map((item) => ({
       productId: String(item._id || item.id),
       name: item.title || item.name,
-      price: parsePrice(item.price),
+      price: parseFloat(item.price.replace(/[₹,]/g, "")),
       quantity: item.quantity || 1,
       image: item.img,
       size: item.selectedSize || null,
@@ -91,12 +97,19 @@ const Cart = () => {
     };
 
     try {
-      const orderResponse = await createOrder({ items, total, shippingDetails });
-      const orderId = orderResponse.data.orderId;
+      const res = await createOrder({ items, total, shippingDetails });
+      const orderId = res?.data?.order?._id || res?.data?.orderId;
 
-      navigate("/checkout", { state: { orderId, items, total, shippingDetails } });
+      if (!orderId) {
+        throw new Error("Order creation failed");
+      }
+
+      navigate("/checkout", {
+        state: { orderId, items, total, shippingDetails },
+      });
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to create order");
+      console.log("CHECKOUT ERROR:", err);
+      toast.error("Failed to create order. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -146,6 +159,10 @@ const Cart = () => {
           <div className="nav-icon-responsive" onClick={() => navigate("/cart")}>
             <FaShoppingBag style={{ fontSize: "20px", color: "white" }} />
             <span className="nav-icon-badge">{cartlistCount}</span>
+          </div>
+          <div className="nav-icon-responsive" onClick={() => navigate("/orders")}>
+            <FaClipboardList style={{ fontSize: "20px", color: "white" }} />
+            
           </div>
         </div>
       </div>
